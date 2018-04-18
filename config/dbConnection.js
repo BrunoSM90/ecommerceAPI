@@ -25,21 +25,31 @@ function query(db, dados) {
 					console.log(err);
 				} else {
 					var res = dados.response;
-					res.send(result);
+					res.json(result);
 				}
 			})
 		return;
 
-		case 'insertProduct':
-			collection.insert(dados, function(err, result) {
+		case 'getUser':
+			collection.find().toArray(function(err, result) {
 				if(err) {
 					console.log(err);
 				} else {
-					console.log(result);
+					var res = dados.response;
+					res.json(result);
+				}
+			});
+		return;
+
+		case 'insertUser':
+			collection.insert(dados.data, function(err, result) {
+				if(err) {
+					console.log(err);
+				} else {
+					var res = dados.response;
+					res.json('Usuário inserido com sucesso');
 				}
 			})
-
-		return;
 	}
 }
 
