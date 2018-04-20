@@ -1,8 +1,12 @@
+var crypto = require('crypto');
+
 function usuariosDAO(connection) {
 	this._connection = connection;
 }
 
 usuariosDAO.prototype.insertUser = function(req, res) {
+
+		req.body.password = crypto.createHash('md5').update(req.body.password).digest('hex');
 
 		var dados = {
 		operation: 'insertUser',

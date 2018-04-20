@@ -5,5 +5,9 @@ module.exports = function(application) {
 
 	application.post('/products', function(req, res) {
 		application.app.controllers.products.insertProduct(application, req, res);
-	})
+	});
+
+	application.get('/products/tax', function(req, res) {
+		application.app.controllers.products.getTax(application, req, res);
+	});
 }

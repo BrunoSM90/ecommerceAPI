@@ -29,6 +29,18 @@ this._connection(dados);
 
 }
 
+produtosDAO.prototype.getTax = function(req, res) {
+
+		var dados = {
+		operation: 'getTax',
+		collection: 'tax',
+		response: res,
+		}
+
+ this._connection(dados);
+
+}
+
 module.exports = function() {
 	return produtosDAO;
 }
