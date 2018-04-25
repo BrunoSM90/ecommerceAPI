@@ -32,6 +32,21 @@ this._connection(dados);
 
 }
 
+usuariosDAO.prototype.getUserAuth = function(req, res) {
+
+		req.body.password = crypto.createHash('md5').update(req.body.password).digest('hex');
+
+		var dados = {
+		operation: 'getUserAuth',
+		collection: 'users',
+		data: req.body,
+		response: res,
+		}
+
+this._connection(dados);
+
+}
+
 
 
 module.exports = function() {

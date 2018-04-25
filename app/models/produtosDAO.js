@@ -9,23 +9,21 @@ produtosDAO.prototype.getProducts = function(req, res) {
 		collection: 'products',
 		response: res,
 		}
-
+		
 this._connection(dados);
 
 }
 
 produtosDAO.prototype.insertProduct = function(req, res) {
-
+	console.log('reqbody ' + JSON.stringify(req.body));
 		var dados = {
-		operation: 'insertProducts',
+		operation: 'insertProduct',
 		collection: 'products',
-		data: {
-
-		},
+		data: req.body,
 		response: res,
 		}
 
-this._connection(dados);
+// this._connection(dados);
 
 }
 

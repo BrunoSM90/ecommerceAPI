@@ -13,3 +13,11 @@ module.exports.getUser = function(application, req ,res) {
 
 	usuariosDao.getUser(req, res);
 }
+
+module.exports.getUserAuth = function(application, req ,res) {
+
+	var connection = application.config.dbConnection;
+	var usuariosDao = new application.app.models.usuariosDAO(connection);
+
+	usuariosDao.getUserAuth(req, res);
+}

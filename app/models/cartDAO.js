@@ -31,7 +31,7 @@ this._connection(dados);
 cartDAO.prototype.updateCart = function(req, res) {
 
 		var dados = {
-		operation: 'updateCart',
+		operation: req.body.operation,
 		collection: 'cart',
 		response: res,
 		id: req.body.user,

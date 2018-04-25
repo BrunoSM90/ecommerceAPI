@@ -30,8 +30,41 @@ function query(db, dados) {
 			})
 		return;
 
+		case 'insertProduct':
+			collection.insert(dados.data, function(err, result) {
+				if(err) {
+					console.log(err);
+				} else {
+					var res = dados.response;
+					res.json({msg: 'Produto inserido com sucesso', id: result.insertedIds});
+				}
+			});
+		return;
+
+		case 'removeProduct':
+			collection.remove(dados.data, function(err, result) {
+				if(err) {
+					console.log(err);
+				} else {
+					var res = dados.response;
+					res.json({msg: 'Produto inserido com sucesso', id: result.insertedIds});
+				}
+			});
+		return;
+
 		case 'getUser':
 			collection.find().toArray(function(err, result) {
+				if(err) {
+					console.log(err);
+				} else {
+					var res = dados.response;
+					res.json(result);
+				}
+			});
+		return;
+
+		case 'getUserAuth':
+			collection.find({login: {$eq: dados.data.login}, password: {$eq: dados.data.password}}).toArray(function(err, result) {
 				if(err) {
 					console.log(err);
 				} else {
@@ -74,12 +107,27 @@ function query(db, dados) {
 			});
 		return;
 
-		case 'updateCart':
-			collection.findOneAndUpdate({id_usuario: dados.id}, {$push: {produtos: dados.item}}, function(err, result) {
+		case 'insertIntoCart':
+		console.log('insert');
+			collection.findOneAndUpdate({id_usuario: dados.id}, {$push: {produtos: dados.item}}, {returnNewDocument: true}, function(err, result) {
 				if(err) {
 					console.log(err);
 				} else {
 					var res = dados.response;
+					console.log(result);
+					res.json(result.value.produtos);
+				}
+			});
+		return;
+
+		case 'removeFromCart':
+			console.log('remove');
+			collection.findOneAndUpdate({id_usuario: dados.id}, {$pull: {produtos: dados.item}}, {returnNewDocument: true}, function(err, result) {
+				if(err) {
+					console.log(err);
+				} else {
+					var res = dados.response;
+					console.log(result);
 					res.json(result.value.produtos);
 				}
 			});
